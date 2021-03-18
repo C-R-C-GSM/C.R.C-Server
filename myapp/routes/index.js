@@ -3,8 +3,10 @@ var router = express.Router();
 
 
 router.get('/', function(req, res, next) {
+  console.log('get success');
   res.render('index', { title: 'Express' });
-  console.log('웹툰보고싶다.');
+  
 });
 
 module.exports = router;
+ 
