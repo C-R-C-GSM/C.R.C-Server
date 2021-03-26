@@ -1,9 +1,20 @@
 var express = require('express');
 var router = express.Router();
-
+require('dotenv').config();
 
 let students = new Array(210);
 
+const mysql = require("mysql");
+
+var connection = mysql.createConnection({
+    host:process.env.DB_HOST,
+    port:process.env.DB_PORT,
+    user:process.env.DB_USER ,
+    password:process.env.DB_PASSWORD,
+    database:process.env.DB_DATABASE
+});
+
+connection.connect();
 
 
 router.get('/', function(req, res, next) {
@@ -12,15 +23,14 @@ router.get('/', function(req, res, next) {
 });
 
 
+
 router.post('/', function(req,res,next) {
   console.log('post success');
-  for (let index = 0; index < students.length; index++) {
-    students[index] = req.body.scan;
-    req.body.scan = null;
-    console.log(students[index]);
-    while(req.body.scan == null);
-    console.log(students[index]);
-  }
+  connection.query("SELECT * FROM student", function(error, results, fields) {
+    console.log(results[0].number);
+    res.send(results[0].number);
+  });
+
   console.log('post end');
 });
 
