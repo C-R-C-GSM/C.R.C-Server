@@ -16,12 +16,12 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
-
-router.get('/', function(req, res, next) {
+//나중엔 DB에서 값 가져오기
+let student = 0;
+router.get('/', function(req, res, next) { c
   console.log('get success');
-  res.render('index');
+  res.render('index', {student: student});
 });
-
 
 
 router.post('/', function(req,res,next) {
@@ -30,7 +30,9 @@ router.post('/', function(req,res,next) {
     console.log(results[0].number);
     res.send(results[0].number);
   });
-
+  connection.query("SELECT students FROM student", function(error, results, fields) {
+    console.log(results[0].check);
+  });
   console.log('post end');
 });
 
