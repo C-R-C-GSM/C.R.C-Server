@@ -17,10 +17,21 @@ var connection = mysql.createConnection({
 connection.connect();
 
 //나중엔 DB에서 값 가져오기
-let student = 0;
-router.get('/', function(req, res, next) { c
+let student = 0;  //학생의 count수
+let num = 0;  //if문에 사용되기 위한 변수.
+router.get('/', function(req, res, next) {
   console.log('get success');
-  res.render('index', {student: student});
+  res.render('index', {student: student});  //페이지와 변수는 맨 처음에만 준다.
+  num = student;
+  while(TRUE) {
+    if(student != num) {
+      num = student;
+      res.render({student: student}); //페이지는 이미 보내졌기 때문에 변수만 보낸다.
+    } else {
+      setTimeout(function() {}, 1000);
+    }
+  }
+
 });
 
 
