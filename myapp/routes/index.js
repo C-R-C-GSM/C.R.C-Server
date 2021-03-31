@@ -20,7 +20,7 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
-let student = 0;
+//let student = 0;
 //나중엔 DB에서 값 가져오기
 //학생의 count수
 
@@ -42,7 +42,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req,res,next) {
-  num = req.body.asdf;
+  num = req.body.counter;
   console.log(req.body);
   console.log('post success');
   /*  나중에 쓸 쿼리문
@@ -54,17 +54,7 @@ router.post('/', function(req,res,next) {
     console.log(results[0].check);
   });
   */
-  res.render('index', {student: student});  //페이지와 변수는 맨 처음에만 준다.
-  num = student;
-  while(TRUE) {
-    if(student != num) {
-      student = num;
-      res.render({student: student}); //페이지는 이미 보내졌기 때문에 변수만 보낸다.
-    } else {
-      setTimeout(function() {}, 1000);
-      num = req.body.asdf;
-    }
-  }
+  res.render('index', {num:num});  //페이지와 변수는 맨 처음에만 준다.
   console.log('post end');
 });
 
