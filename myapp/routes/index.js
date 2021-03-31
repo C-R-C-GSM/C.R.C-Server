@@ -1,10 +1,14 @@
 var express = require('express');
 var router = express.Router();
 require('dotenv').config();
+var bodyParser = require('body-parser');
+// app.use(bodyParser.urlencoded({extended:true}));
+// app.use(bodyParser.json());
 
 let students = new Array(210);
 
 const mysql = require("mysql");
+const app = require('../app');
 
 var connection = mysql.createConnection({
     host:process.env.DB_HOST,
@@ -16,9 +20,12 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
+let student = 0;
 //나중엔 DB에서 값 가져오기
-let student = 0;  //학생의 count수
+//학생의 count수
+
 let num = 0;  //if문에 사용되기 위한 변수.
+
 router.get('/', function(req, res, next) {
   console.log('get success');
   res.render('index', {student: student});  //페이지와 변수는 맨 처음에만 준다.
@@ -34,9 +41,11 @@ router.get('/', function(req, res, next) {
 
 });
 
-
 router.post('/', function(req,res,next) {
+  num = req.body.asdf;
+  console.log(req.body);
   console.log('post success');
+  /*  나중에 쓸 쿼리문
   connection.query("SELECT * FROM student", function(error, results, fields) {
     console.log(results[0].number);
     res.send(results[0].number);
@@ -44,6 +53,18 @@ router.post('/', function(req,res,next) {
   connection.query("SELECT students FROM student", function(error, results, fields) {
     console.log(results[0].check);
   });
+  */
+  res.render('index', {student: student});  //페이지와 변수는 맨 처음에만 준다.
+  num = student;
+  while(TRUE) {
+    if(student != num) {
+      student = num;
+      res.render({student: student}); //페이지는 이미 보내졌기 때문에 변수만 보낸다.
+    } else {
+      setTimeout(function() {}, 1000);
+      num = req.body.asdf;
+    }
+  }
   console.log('post end');
 });
 
