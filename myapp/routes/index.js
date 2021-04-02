@@ -29,7 +29,7 @@ var connection = mysql.createConnection({
 connection.connect();
 
 //나중엔 DB에서 값 가져오기
-let student = 0;  //if문에 사용되기 위한 변수.
+let student = 30;  //if문에 사용되기 위한 변수.
 
 router.get('/', function(req, res, next) {
   console.log('get success');
