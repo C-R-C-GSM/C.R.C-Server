@@ -5,13 +5,6 @@ require('dotenv').config();
 
 var bodyParser = require('body-parser');  //python에서 json파일 보내주느라 사용
 
-//사용할 필요 없을 것 같아서 사용 x
-// app.use(bodyParser.urlencoded({extended:true}));
-// app.use(bodyParser.json());
-
-//소켓을 사용하기 위해 사용
-//var server = require('http').createServer(app);
-//var io = require('socket.io')(server);
 
 let students = new Array(210);
 
@@ -50,13 +43,6 @@ router.post('/', function(req,res,next) {
   });
   */
 });
-
-//연결되면 소켓을 이용하여 사용시키는데, 사용 x
-// io.on('connection', function(socket) {
-//   socket.on('event_name', function(data) {
-//     console.log('Message from Client: ' + data);
-//   });
-// });
 
 module.exports = router;
  
