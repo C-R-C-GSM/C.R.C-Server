@@ -42,6 +42,11 @@ router.post('/', function(req,res,next) {
     console.log(results[0].check);
   });
   */
+ connection.query("INSERT INTO students(check) VALUE('"+true+"'", function(error, results, fields) {
+   if(error) {
+     console.log(error);
+   }
+ })
 });
 
 module.exports = router;
