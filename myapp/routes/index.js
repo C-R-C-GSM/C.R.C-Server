@@ -5,9 +5,17 @@ require('dotenv').config();
 
 var bodyParser = require('body-parser');  //python에서 json파일 보내주느라 사용
 
+var client = require('cheerio-httpcli');
+var urlType = require('url');
+//크롤링을 위해 피요한 것
+
+var cheerio = require('cheerio');
+var request = require('request');
+var url = "http://gsm.gen.hs.kr/xboard/board.php?tbnum=8";
+var param = {};
 
 let students = new Array(210);
-
+let meal = new Array(31);
 const mysql = require("mysql");
 //const app = require('../app');
 
@@ -17,6 +25,16 @@ var connection = mysql.createConnection({
     user:process.env.DB_USER ,
     password:process.env.DB_PASSWORD,
     database:process.env.DB_DATABASE
+});
+
+request(url, function (error, response, html){
+  var $ = cheerio.load(html);
+  for (let number = 5; number < num.length; number++) {
+    meal[index] = $(`#xb_fm_list > div.calendar > ul:nth-child(2) > li:nth-child(${number}) > div > div.slider_food_list.slider_food1.cycle-slideshow > div.slider_list.cycle-slide.cycle-slide-active > div.content_info > span`).text();
+  }
+
+//console.log(region);
+
 });
 
 connection.connect();
@@ -46,7 +64,7 @@ router.post('/', function(req,res,next) {
    if(error) {
      console.log(error);
    }
- })
+ });
 });
 
 module.exports = router;
