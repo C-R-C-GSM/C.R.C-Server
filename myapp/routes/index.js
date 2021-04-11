@@ -15,7 +15,8 @@ var url = "http://gsm.gen.hs.kr/xboard/board.php?tbnum=8";
 var param = {};
 
 let students = new Array(210);
-let meal = new Array(31);
+//let meal = new Array(31);
+let meal = "";
 const mysql = require("mysql");
 //const app = require('../app');
 
@@ -29,16 +30,8 @@ var connection = mysql.createConnection({
 
 request(url, function (error, response, html){
   var $ = cheerio.load(html);
-  for (let number = 5; number < num.length; number++) {
-    meal[index] = $(`#xb_fm_list > div.calendar > ul:nth-child(2) > li:nth-child(${number}) > div > div.slider_food_list.slider_food1.cycle-slideshow > div.slider_list.cycle-slide.cycle-slide-active > div.content_info > span`).text();
-  }
-  meal = meal.filter(function(item) {
-    return item !== num && item !== undefined && item !== "";
-  });
-console.log(region);
-
+  meal = $(`#xb_fm_list > div.calendar > ul:nth-child(5) > li:nth-child(2) > div > div.slider_food_list.slider_food19.cycle-slideshow > div.slider_list.cycle-slide.cycle-slide-active > div.content_info > span`).text();
 });
-
 connection.connect();
 
 //나중엔 DB에서 값 가져오기
@@ -47,6 +40,9 @@ let student = 30;  //if문에 사용되기 위한 변수.
 router.get('/', function(req, res, next) {
   console.log('get success');
   res.json({student:student});
+  
+  console.log(meal);
+  console.log('get end')
 });
 
 router.post('/', function(req,res,next) {
