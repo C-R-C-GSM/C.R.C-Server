@@ -32,8 +32,10 @@ request(url, function (error, response, html){
   for (let number = 5; number < num.length; number++) {
     meal[index] = $(`#xb_fm_list > div.calendar > ul:nth-child(2) > li:nth-child(${number}) > div > div.slider_food_list.slider_food1.cycle-slideshow > div.slider_list.cycle-slide.cycle-slide-active > div.content_info > span`).text();
   }
-
-//console.log(region);
+  meal = meal.filter(function(item) {
+    return item !== num && item !== undefined && item !== "";
+  });
+console.log(region);
 
 });
 
