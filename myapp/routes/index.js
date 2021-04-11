@@ -30,7 +30,7 @@ var connection = mysql.createConnection({
 
 request(url, function (error, response, html){
   var $ = cheerio.load(html);
-  meal = $(`#xb_fm_list > div.calendar > ul:nth-child(5) > li:nth-child(2) > div > div.slider_food_list.slider_food19.cycle-slideshow > div.slider_list.cycle-slide.cycle-slide-active > div.content_info > span`).text();
+  meal = $(`#xb_fm_list > div.calendar > ul:nth-child(5) > li:nth-child(2) > div > div.slider_food_list.slider_food19.cycle-slideshow > div.slider_list.cycle-slide.cycle-slide-active > div.content_info`).text();
 });
 connection.connect();
 
