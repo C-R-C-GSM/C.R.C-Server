@@ -27,17 +27,30 @@ num = 5;
 
 connection.connect();
     
+let meals = new Array(31);
+let month = 2;
+let day = 2;
+let food;
+count = 0;
 client.fetch("http://gsm.gen.hs.kr/xboard/board.php?tbnum=8", {}, function (err, $, res, body) {
 //  var list = $("#xb_fm_list > div.calendar > ul:nth-child(3) > li:nth-child(2) > div");
 //success selector 4/5 all meals
-let num = 1;
-//var list = $("#xb_fm_list > div.calendar > ul:nth-child(6) > li:nth-child(5) > div > div.slider_food_list").text();
-var list = $("#xb_fm_list > div.calendar > ul:nth-child(6) > li:nth-child(5) > div > div.slider_food_list.slider_food6.cycle-slideshow > div").text();
-console.log(list);  
+
+for (; month <= 6; month++) {
+  for (; day <= 6; day++) {
+    const element = meals[day];
+    meals[count] = $(`#xb_fm_list > div.calendar > ul:nth-child(${month}) > li:nth-child(${day}) > div > div.slider_food_list`).text();
+    meals = meals.filter(function(item) { //빈 배열을 비워주는 것 필요함
+      return item !== num && item !== undefined && item !== "" &&item !== ;
+    });
+    
+    count++;
+  }
+  
+}
+
+console.log(meals);  
 });
-// client.fetch(url, param, function(err, $, res) {
-//   $(`#xb_fm_list > div.calendar > ul:nth-child(4) > li.today > div > div.slider_food_list.slider_food12.cycle-slideshow > div.slider_list.cycle-slide.cycle-slide-active > div.content_info > span`).text() 
-// });
 
 
 //나중엔 DB에서 값 가져오기
