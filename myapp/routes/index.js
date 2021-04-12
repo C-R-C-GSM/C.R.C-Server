@@ -28,7 +28,7 @@ num = 5;
 connection.connect();
     
 client.fetch("http://gsm.gen.hs.kr/xboard/board.php?tbnum=8", {}, function (err, $, res, body) {
-  var list = $("#xb_fm_list > div.calendar > ul:nth-child(3) > li:nth-child(2) > div");
+  var list = $("#xb_fm_list > div.calendar > ul:nth-child(3) > li:nth-child(4) > div");
   list.each(function(){
     console.log($(this).find("div.slider_food_list.slider_food5.cycle-slideshow").text());
   });  
