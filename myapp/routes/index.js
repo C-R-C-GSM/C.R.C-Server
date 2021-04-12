@@ -28,9 +28,9 @@ num = 5;
 connection.connect();
     
 client.fetch("http://gsm.gen.hs.kr/xboard/board.php?tbnum=8", {}, function (err, $, res, body) {
-  var list = $("#xb_fm_list > div.calendar > ul:nth-child(4) > li.today");
+  var list = $("#xb_fm_list > div.calendar ");
   list.each(function(){
-    console.log($(this).find("li.today").text());
+    console.log($(this).find("ul:nth-child(4)").text());
   });
 });
 
