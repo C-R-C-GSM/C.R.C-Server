@@ -28,10 +28,11 @@ num = 5;
 connection.connect();
     
 client.fetch("http://gsm.gen.hs.kr/xboard/board.php?tbnum=8", {}, function (err, $, res, body) {
-  var list = $("#xb_fm_list > div.calendar > ul:nth-child(3) > li:nth-child(4) > div");
-  list.each(function(){
-    console.log($(this).find("div.slider_food_list.slider_food5.cycle-slideshow").text());
-  });  
+//  var list = $("#xb_fm_list > div.calendar > ul:nth-child(3) > li:nth-child(2) > div");
+//success selector 4/5 all meals
+let num = 1;
+var list = $("#xb_fm_list > div.calendar > ul:nth-child(6) > li:nth-child(5) > div > div.slider_food_list").text();
+console.log(list);  
 });
 // client.fetch(url, param, function(err, $, res) {
 //   $(`#xb_fm_list > div.calendar > ul:nth-child(4) > li.today > div > div.slider_food_list.slider_food12.cycle-slideshow > div.slider_list.cycle-slide.cycle-slide-active > div.content_info > span`).text() 
