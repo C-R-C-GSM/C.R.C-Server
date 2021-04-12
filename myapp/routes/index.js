@@ -4,17 +4,13 @@ var router = express.Router();
 require('dotenv').config();
 
 var bodyParser = require('body-parser');  //python에서 json파일 보내주느라 사용
-
 var client = require('cheerio-httpcli');
 var urlType = require('url');
-//크롤링을 위해 피요한 것
-
-var cheerio = require('cheerio');
-var request = require('request');
-var url = "http://gsm.gen.hs.kr/xboard/board.php?tbnum=8";
+//var cheerio = require('cheerio');
 var param = {};
+var url = "http://gsm.gen.hs.kr/xboard/board.php?tbnum=8";
 
-let students = new Array(210);
+
 //let meal = new Array(31);
 let meal = "";
 const mysql = require("mysql");
@@ -27,22 +23,30 @@ var connection = mysql.createConnection({
     password:process.env.DB_PASSWORD,
     database:process.env.DB_DATABASE
 });
+num = 5;
 
-request(url, function (error, response, html){
-  var $ = cheerio.load(html);
-  meal = $(`#xb_fm_list > div.calendar > ul:nth-child(5) > li:nth-child(2) > div > div.slider_food_list.slider_food19.cycle-slideshow > div.slider_list.cycle-slide.cycle-slide-active > div.content_info`).text();
-});
 connection.connect();
+    
+client.fetch("http://gsm.gen.hs.kr/xboard/board.php?tbnum=8", {}, function (err, $, res, body) {
+  var list = $("#xb_fm_list > div.calendar > ul:nth-child(4) > li.today");
+  list.each(function(){
+    console.log($(this).find("li.today").text());
+  });
+});
+
+// client.fetch(url, param, function(err, $, res) {
+//   $(`#xb_fm_list > div.calendar > ul:nth-child(4) > li.today > div > div.slider_food_list.slider_food12.cycle-slideshow > div.slider_list.cycle-slide.cycle-slide-active > div.content_info > span`).text() 
+// });
+
 
 //나중엔 DB에서 값 가져오기
 let student = 30;  //if문에 사용되기 위한 변수.
 
 router.get('/', function(req, res, next) {
   console.log('get success');
-  res.json({student:student});
+  //res.json({student:student});
   
-  console.log(meal);
-  console.log('get end')
+  res.json({meal});
 });
 
 router.post('/', function(req,res,next) {
