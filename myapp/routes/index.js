@@ -31,7 +31,8 @@ client.fetch("http://gsm.gen.hs.kr/xboard/board.php?tbnum=8", {}, function (err,
 //  var list = $("#xb_fm_list > div.calendar > ul:nth-child(3) > li:nth-child(2) > div");
 //success selector 4/5 all meals
 let num = 1;
-var list = $("#xb_fm_list > div.calendar > ul:nth-child(6) > li:nth-child(5) > div > div.slider_food_list").text();
+//var list = $("#xb_fm_list > div.calendar > ul:nth-child(6) > li:nth-child(5) > div > div.slider_food_list").text();
+var list = $("#xb_fm_list > div.calendar > ul:nth-child(6) > li:nth-child(5) > div > div.slider_food_list.slider_food6.cycle-slideshow > div").text();
 console.log(list);  
 });
 // client.fetch(url, param, function(err, $, res) {
