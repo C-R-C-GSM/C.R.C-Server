@@ -28,7 +28,7 @@ num = 5;
 connection.connect();
     
 let meals = new Array(31);
-let month = 2;
+let week = 2;
 let day = 2;
 let food;
 count = 0;
@@ -36,17 +36,15 @@ client.fetch("http://gsm.gen.hs.kr/xboard/board.php?tbnum=8", {}, function (err,
 //  var list = $("#xb_fm_list > div.calendar > ul:nth-child(3) > li:nth-child(2) > div");
 //success selector 4/5 all meals
 
-for (; month <= 6; month++) {
+for (; week <= 6; week++) {
   for (; day <= 6; day++) {
     const element = meals[day];
-    meals[count] = $(`#xb_fm_list > div.calendar > ul:nth-child(${month}) > li:nth-child(${day}) > div > div.slider_food_list`).text();
-    meals = meals.filter(function(item) { //빈 배열을 비워주는 것 필요함
-      return item !== num && item !== undefined && item !== "" &&item !== ;
-    });
-    
-    count++;
+    meals[count] = $(`#xb_fm_list > div.calendar > ul:nth-child(${week}) > li:nth-child(${day}) > div > div.slider_food_list`).text();
+    console.log(meals[count]);
+    if (meals[count] == '\r\n') {
+      meals[count] == null;
+    }
   }
-  
 }
 
 console.log(meals);  
