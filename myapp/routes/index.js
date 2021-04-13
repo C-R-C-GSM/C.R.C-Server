@@ -28,6 +28,7 @@ num = 5;
 connection.connect();
     
 let meals = new Array(31);
+let arr = new Array(50);
 let week = 2;
 let day = 2;
 let food;
@@ -36,18 +37,24 @@ client.fetch("http://gsm.gen.hs.kr/xboard/board.php?tbnum=8", {}, function (err,
 //  var list = $("#xb_fm_list > div.calendar > ul:nth-child(3) > li:nth-child(2) > div");
 //success selector 4/5 all meals
 
+
+
 for (; week <= 6; week++) {
   for (; day <= 6; day++) {
-    const element = meals[day];
-    meals[count] = $(`#xb_fm_list > div.calendar > ul:nth-child(${week}) > li:nth-child(${day}) > div > div.slider_food_list`).text();
-    console.log(meals[count]);
-    if (meals[count] == '\r\n') {
-      meals[count] == null;
+    arr[count] = $(`#xb_fm_list > div.calendar > ul:nth-child(${week}) > li:nth-child(${day}) > div > div.slider_food_list`).text();
+    console.log(arr[count]);
+    for (let index = 0; index < arr.length; index++) {
+      if(arr[index]=='\r\n') {
+        arr[index] = 0;
+      }
+      
     }
   }
 }
-
-console.log(meals);  
+const set = new Set(arr);
+const uni = [...set];
+console.log(set[1]);
+//console.log(meals);  
 });
 
 
