@@ -42,7 +42,7 @@ client.fetch("http://gsm.gen.hs.kr/xboard/board.php?tbnum=8", {}, function (err,
 for (; week <= 6; week++) {
   for (; day <= 6; day++) {
     arr[count] = $(`#xb_fm_list > div.calendar > ul:nth-child(${week}) > li:nth-child(${day}) > div > div.slider_food_list`).text();
-    console.log(arr[count]);
+    // console.log(arr[count]);
     for (let index = 0; index < arr.length; index++) {
       if(arr[index]=='\r\n') {
         arr[index] = 0;
@@ -51,10 +51,13 @@ for (; week <= 6; week++) {
     }
   }
 }
+
+// const text = arr.join('');
+// console.log(text.replace('\n', ''));
 const set = new Set(arr);
 const uni = [...set];
-console.log(set[1]);
-//console.log(meals);  
+console.log(set[0]);
+console.log(meals);  
 });
 
 
