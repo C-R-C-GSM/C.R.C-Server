@@ -52,12 +52,13 @@ for (; week <= 6; week++) {
   }
 }
 
-// const text = arr.join('');
-// console.log(text.replace('\n', ''));
-const set = new Set(arr);
-const uni = [...set];
-console.log(set);
-console.log(set.replace('\r\n',''));
+const text = arr.join('');
+console.log(text.replace('.', '@'));
+
+// const set = new Set(arr);
+// const uni = [...set];
+// console.log(set);
+
 //console.log(meals);  
 });
 
