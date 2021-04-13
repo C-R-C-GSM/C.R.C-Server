@@ -56,8 +56,9 @@ for (; week <= 6; week++) {
 // console.log(text.replace('\n', ''));
 const set = new Set(arr);
 const uni = [...set];
-console.log(set[0]);
-console.log(meals);  
+console.log(set);
+console.log(set.replace('\r\n',''));
+//console.log(meals);  
 });
 
 
