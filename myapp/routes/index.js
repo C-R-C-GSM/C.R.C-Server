@@ -51,17 +51,16 @@ const getHtml = async () => {
 
 getHtml()
   .then(html => {
-    let webc;
+    let webc = [];
     const $ = cheerio.load(html.data);
     const $bodyList = $("#xb_fm_list > div.calendar > ul:nth-child(3) > li:nth-child(2) > div > div.slider_food_list.slider_food5.cycle-slideshow");
 
     $bodyList.each(function(i, elem) {
-      webc= $(this).find('div.slider_list').text()
+      webc.push($(this).find('div.slider_list').text());
     });
     return webc;
   })
   .then(res => log(res));
-
 // let web = $(`#xb_fm_list > div.calendar > ul:nth-child(4) > li:nth-child(3) > div > div.slider_food_list`).text();
 // console.log(web); 
 // for (; week <= 6; week++) {
