@@ -37,8 +37,33 @@ client.fetch("http://gsm.gen.hs.kr/xboard/board.php?tbnum=8", {}, function (err,
 //  var list = $("#xb_fm_list > div.calendar > ul:nth-child(3) > li:nth-child(2) > div");
 //success selector 4/5 all meals
 
-let web = $(`#xb_fm_list > div.calendar > ul:nth-child(${week}) > li:nth-child(${day}) > div > div.slider_food_list`).text();
-console.log(web);
+const axios = require("axios");
+const cheerio = require("cheerio");
+const log = console.log;
+
+const getHtml = async () => {
+  try {
+    return await axios.get("http://gsm.gen.hs.kr/xboard/board.php?tbnum=8");
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+getHtml()
+  .then(html => {
+    let webc;
+    const $ = cheerio.load(html.data);
+    const $bodyList = $("#xb_fm_list > div.calendar > ul:nth-child(3) > li:nth-child(2) > div > div.slider_food_list.slider_food5.cycle-slideshow");
+
+    $bodyList.each(function(i, elem) {
+      webc= $(this).find('div.slider_list').text()
+    });
+    return webc;
+  })
+  .then(res => log(res));
+
+// let web = $(`#xb_fm_list > div.calendar > ul:nth-child(4) > li:nth-child(3) > div > div.slider_food_list`).text();
+// console.log(web); 
 // for (; week <= 6; week++) {
 //   for (; day <= 6; day++) {
 //     arr[count] = $(`#xb_fm_list > div.calendar > ul:nth-child(${week}) > li:nth-child(${day}) > div > div.slider_food_list`).text();
