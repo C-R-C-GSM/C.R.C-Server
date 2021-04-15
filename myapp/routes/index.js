@@ -58,7 +58,7 @@ getHtml()
     $bodyList.each(function(i, elem) {
       webc.push($(this).find('div.slider_list').text());
     });
-    return webc[0];
+    return webc[1];
   })
   .then(res => log(res));
 // let web = $(`#xb_fm_list > div.calendar > ul:nth-child(4) > li:nth-child(3) > div > div.slider_food_list`).text();
