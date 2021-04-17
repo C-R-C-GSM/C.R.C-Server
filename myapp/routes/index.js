@@ -33,56 +33,53 @@ let week = 2;
 let day = 2;
 let food;
 count = 0;
+
 //I thought nodejs crawling is very hard.. so later, I will solve that
 client.fetch("http://gsm.gen.hs.kr/xboard/board.php?tbnum=8", {}, function (err, $, res, body) {
 //  var list = $("#xb_fm_list > div.calendar > ul:nth-child(3) > li:nth-child(2) > div");
 //success selector 4/5 all meals
 
-// const axios = require("axios");
-// const cheerio = require("cheerio");
-// const log = console.log;
+const axios = require("axios");
+const cheerio = require("cheerio");
+const log = console.log;
 
-// const getHtml = async () => {
-//   try {
-//     return await axios.get("http://gsm.gen.hs.kr/xboard/board.php?tbnum=8");
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
+const getHtml = async () => {
+  try {
+    return await axios.get("http://gsm.gen.hs.kr/xboard/board.php?tbnum=8");
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-// getHtml()
-//   .then(html => {
-//     let webc = [];
-//     const $ = cheerio.load(html.data);
-//     const $bodyList = $("#xb_fm_list > div.calendar > ul:nth-child(3) > li:nth-child(2) > div > div.slider_food_list.slider_food5.cycle-slideshow");
+getHtml()
+  .then(html => {
+    let webc = [];
+    const $ = cheerio.load(html.data);
+    const $bodyList = $("#xb_fm_list > div.calendar > ul:nth-child(3) > li:nth-child(2) > div > div.slider_food_list.slider_food5.cycle-slideshow");
 
-//     $bodyList.each(function(i, elem) {
-//       webc.push($(this).find('div.slider_list').text());
-//     });
-//     return webc[1];
-//   })
-//   .then(res => log(res));
+    $bodyList.each(function(i, elem) {
+      webc.push($(this).find('div.slider_list').text());
+    });
+    return webc[1];
+  })
+  .then(res => log(res));
 
 
-
+//web text print
 // let web = $(`#xb_fm_list > div.calendar > ul:nth-child(4) > li:nth-child(3) > div > div.slider_food_list`).text();
 // console.log(web); 
-// for (; week <= 6; week++) {
-//   for (; day <= 6; day++) {
-//     arr[count] = $(`#xb_fm_list > div.calendar > ul:nth-child(${week}) > li:nth-child(${day}) > div > div.slider_food_list`).text();
-//     // console.log(arr[count]);
-//     for (let index = 0; index < arr.length; index++) {
-//       if(arr[index]=='\r\n') {
-//         arr[index] = 0;
-//       }
-      
-//     }
-//   }
-// }
+
+for (; week <= 6; week++) {
+  for (; day <= 6; day++) {
+    arr[count] = $(`#xb_fm_list > div.calendar > ul:nth-child(${week}) > li:nth-child(${day}) > div > div.slider_food_list`).text();
+    // console.log(arr[count]);
+  }
+}
 
 // const text = arr.join('');
-// console.log(text.replace('.', '@'));
+// console.log(text.replace('+', '@'));
 
+console.log(arr);
 // const set = new Set(arr);
 // const uni = [...set];
 // console.log(set);
