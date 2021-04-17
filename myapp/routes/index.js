@@ -79,7 +79,7 @@ for (; week <= 6; week++) {
 // const text = arr.join('');
 // console.log(text.replace('+', '@'));
 
-console.log(arr);
+console.log(arr[0]);
 // const set = new Set(arr);
 // const uni = [...set];
 // console.log(set);
