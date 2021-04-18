@@ -6,11 +6,19 @@ require('dotenv').config();
 var bodyParser = require('body-parser');  //python에서 json파일 보내주느라 사용
 var client = require('cheerio-httpcli');
 var urlType = require('url');
-//var cheerio = require('cheerio');
 var param = {};
 var url = "http://gsm.gen.hs.kr/xboard/board.php?tbnum=8";
 
+var io = require('socket.io');
 
+io.on('connection', function (socket) {
+    console.log('connect');
+    var instanceId = socket.id;
+    socket.on('msg', function (data) {
+        console.log(data);
+        socket.emit('recMsg', {comment: instanceId + ":" + data.comment+'\n'});
+    })
+});
 //let meal = new Array(31);
 let meal = "";
 const mysql = require("mysql");
@@ -42,7 +50,7 @@ client.fetch("http://gsm.gen.hs.kr/xboard/board.php?tbnum=8", {}, function (err,
 const axios = require("axios");
 const cheerio = require("cheerio");
 const log = console.log;
-
+//#region axios and cheerio web crawling
 // const getHtml = async () => {
 //   try {
 //     return await axios.get("http://gsm.gen.hs.kr/xboard/board.php?tbnum=8");
@@ -63,28 +71,26 @@ const log = console.log;
 //     return webc[1];
 //   })
 //   .then(res => log(res));
+//#endregion
 
 
-//web text print
-// let web = $(`#xb_fm_list > div.calendar > ul:nth-child(4) > li:nth-child(3) > div > div.slider_food_list`).text();
-// console.log(web); 
-
-//use for crawling
+//#region use for crawling
 // for (; week <= 6; week++) {
 //   for (; day <= 6; day++) {
 //     arr[count] = $(`#xb_fm_list > div.calendar > ul:nth-child(${week}) > li:nth-child(${day}) > div > div.slider_food_list`).text();
 //     // console.log(arr[count]);
 //   }
 // }
+//#endregion
 
 // const text = arr.join('');
 // console.log(text.replace('+', '@'));
-arr[0] = $(`#xb_fm_list > div.calendar > ul:nth-child(${3}) > li:nth-child(${3}) > div > div.slider_food_list`).text();
+
 // let result = arr[0].split('+');
 //console.log(result[0]);
 
 //console.log(arr[0]);
-
+arr[0] = $(`#xb_fm_list > div.calendar > ul:nth-child(${3}) > li:nth-child(${3}) > div > div.slider_food_list`).text();
  const set = new Set(arr);
  const uni = [...set];
 
