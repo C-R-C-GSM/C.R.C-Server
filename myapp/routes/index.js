@@ -43,26 +43,26 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 const log = console.log;
 
-const getHtml = async () => {
-  try {
-    return await axios.get("http://gsm.gen.hs.kr/xboard/board.php?tbnum=8");
-  } catch (error) {
-    console.error(error);
-  }
-};
+// const getHtml = async () => {
+//   try {
+//     return await axios.get("http://gsm.gen.hs.kr/xboard/board.php?tbnum=8");
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
 
-getHtml()
-  .then(html => {
-    let webc = [];
-    const $ = cheerio.load(html.data);
-    const $bodyList = $("#xb_fm_list > div.calendar > ul:nth-child(3) > li:nth-child(2) > div > div.slider_food_list.slider_food5.cycle-slideshow");
+// getHtml()
+//   .then(html => {
+//     let webc = [];
+//     const $ = cheerio.load(html.data);
+//     const $bodyList = $("#xb_fm_list > div.calendar > ul:nth-child(3) > li:nth-child(2) > div > div.slider_food_list.slider_food5.cycle-slideshow");
 
-    $bodyList.each(function(i, elem) {
-      webc.push($(this).find('div.slider_list').text());
-    });
-    return webc[1];
-  })
-  .then(res => log(res));
+//     $bodyList.each(function(i, elem) {
+//       webc.push($(this).find('div.slider_list').text());
+//     });
+//     return webc[1];
+//   })
+//   .then(res => log(res));
 
 
 //web text print
@@ -78,8 +78,11 @@ for (; week <= 6; week++) {
 
 // const text = arr.join('');
 // console.log(text.replace('+', '@'));
+let result = arr[0].split('+');
+console.log(result[0]);
 
-console.log(arr[0]);
+//console.log(arr[0]);
+
 // const set = new Set(arr);
 // const uni = [...set];
 // console.log(set);
