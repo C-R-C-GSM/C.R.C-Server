@@ -69,23 +69,29 @@ const log = console.log;
 // let web = $(`#xb_fm_list > div.calendar > ul:nth-child(4) > li:nth-child(3) > div > div.slider_food_list`).text();
 // console.log(web); 
 
-for (; week <= 6; week++) {
-  for (; day <= 6; day++) {
-    arr[count] = $(`#xb_fm_list > div.calendar > ul:nth-child(${week}) > li:nth-child(${day}) > div > div.slider_food_list`).text();
-    // console.log(arr[count]);
-  }
-}
+//use for crawling
+// for (; week <= 6; week++) {
+//   for (; day <= 6; day++) {
+//     arr[count] = $(`#xb_fm_list > div.calendar > ul:nth-child(${week}) > li:nth-child(${day}) > div > div.slider_food_list`).text();
+//     // console.log(arr[count]);
+//   }
+// }
 
 // const text = arr.join('');
 // console.log(text.replace('+', '@'));
-let result = arr[0].split('+');
-console.log(result[0]);
+arr[0] = $(`#xb_fm_list > div.calendar > ul:nth-child(${3}) > li:nth-child(${3}) > div > div.slider_food_list`).text();
+// let result = arr[0].split('+');
+//console.log(result[0]);
 
 //console.log(arr[0]);
 
-// const set = new Set(arr);
-// const uni = [...set];
-// console.log(set);
+ const set = new Set(arr);
+ const uni = [...set];
+
+let setToArr = Array.from(set);
+
+ let result = setToArr[0].split('+');
+ console.log(result[1]);
 
 //console.log(meals);  
 });
