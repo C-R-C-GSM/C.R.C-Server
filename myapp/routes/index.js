@@ -9,16 +9,10 @@ var urlType = require('url');
 var param = {};
 var url = "http://gsm.gen.hs.kr/xboard/board.php?tbnum=8";
 
-var io = require('socket.io');
+var server = require('http').createServer(express);
+var io = require('socket.io')(server);
 
-io.on('connection', function (socket) {
-    console.log('connect');
-    var instanceId = socket.id;
-    socket.on('msg', function (data) {
-        console.log(data);
-        socket.emit('recMsg', {comment: instanceId + ":" + data.comment+'\n'});
-    })
-});
+
 //let meal = new Array(31);
 let meal = "";
 const mysql = require("mysql");
