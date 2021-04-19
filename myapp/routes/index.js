@@ -9,9 +9,11 @@ var urlType = require('url');
 var param = {};
 var url = "http://gsm.gen.hs.kr/xboard/board.php?tbnum=8";
 
-var server = require('http').createServer(express);
-var io = require('socket.io')(server);
-
+app.io = require('socket.io')();
+ 
+app.io.on('connection', function(socket){
+  socket.broadcast.emit('hi');
+});
 
 //let meal = new Array(31);
 let meal = "";
