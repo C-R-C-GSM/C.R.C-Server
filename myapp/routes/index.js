@@ -91,8 +91,9 @@ const log = console.log;
 let webcrawling = $(`#xb_fm_list > div.calendar > ul:nth-child(${3}) > li:nth-child(${3}) > div > div.slider_food_list`).text();
 //console.log(webcrawling);
 arr = webcrawling.split('"\n"');
-
-arr.splice(arr.indexOf('"\t"'),1);
+arr[0] = arr[0].replace(/\t/g,"");
+arr[0] = arr[0].replace(/\r/g,"");
+arr[0] = arr[0].replace(/\n/g,"");
 console.log(arr);
 // const set = new Set(arr);
 // const uni = [...set];
