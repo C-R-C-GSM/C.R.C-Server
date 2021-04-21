@@ -42,4 +42,12 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+// var app = express();
+// var http = require('http');
+// var socketio = require('socket.io');
+// var server = http.createServer(app);
+// var io = socketio.listen(server);
+// server.listen(8080);
+
+
 module.exports = app;
