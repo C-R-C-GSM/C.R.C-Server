@@ -43,7 +43,7 @@ count = 0;
 
 //I thought nodejs crawling is very hard.. so later, I will solve that
 client.fetch("http://gsm.gen.hs.kr/xboard/board.php?tbnum=8", {}, function (err, $, res, body) {
-//  var list = $("#xb_fm_list > div.calendar > ul:nth-child(3) > li:nth-child(2) > div");
+  var list = $("#xb_fm_list > div.calendar > ul:nth-child(3) > li:nth-child(2) > div");
 //success selector 4/5 all meals
 
 const axios = require("axios");
@@ -57,15 +57,14 @@ const log = console.log;
 //     console.error(error);
 //   }
 // };
-
 // getHtml()
 //   .then(html => {
 //     let webc = [];
 //     const $ = cheerio.load(html.data);
-//     const $bodyList = $("#xb_fm_list > div.calendar > ul:nth-child(3) > li:nth-child(2) > div > div.slider_food_list.slider_food5.cycle-slideshow");
+//     const $bodyList = $("#xb_fm_list > div.calendar > ul:nth-child(3) > li:nth-child(2) > div > div.slider_food_list");
 
 //     $bodyList.each(function(i, elem) {
-//       webc.push($(this).find('div.slider_list').text());
+//       webc.push($(this).find('div').text());
 //     });
 //     return webc[1];
 //   })
@@ -89,14 +88,19 @@ const log = console.log;
 //console.log(result[0]);
 
 //console.log(arr[0]);
-arr[0] = $(`#xb_fm_list > div.calendar > ul:nth-child(${3}) > li:nth-child(${3}) > div > div.slider_food_list`).text();
- const set = new Set(arr);
- const uni = [...set];
+let webcrawling = $(`#xb_fm_list > div.calendar > ul:nth-child(${3}) > li:nth-child(${3}) > div > div.slider_food_list`).text();
+//console.log(webcrawling);
+arr = webcrawling.split('"\n"');
 
-let setToArr = Array.from(set);
+arr.splice(arr.indexOf('"\t"'),1);
+console.log(arr);
+// const set = new Set(arr);
+// const uni = [...set];
 
- let result = setToArr[0].split('+');
- console.log(result[1]);
+//let setToArr = Array.from(set);
+
+// let result = setToArr[0].split('+');
+// console.log(result[1]);
 
 //console.log(meals);  
 });
