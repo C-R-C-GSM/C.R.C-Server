@@ -5,9 +5,6 @@ require('dotenv').config();
 
 var bodyParser = require('body-parser');  //python에서 json파일 보내주느라 사용
 var client = require('cheerio-httpcli');
-var urlType = require('url');
-var param = {};
-var url = "http://gsm.gen.hs.kr/xboard/board.php?tbnum=8";
 
 //#region 
 //socket io
@@ -18,10 +15,8 @@ io.on('connection', function(socket){
 });
 //#endregion
 
-//let meal = new Array(31);
 let meal = "";
 const mysql = require("mysql");
-//const app = require('../app');
 
 var connection = mysql.createConnection({
     host:process.env.DB_HOST,
@@ -39,11 +34,8 @@ let meal_text_split = new Array();
 let arr = new Array();
 count = 0;
 
-//I thought nodejs crawling is very hard.. so later, I will solve that
 client.fetch("http://gsm.gen.hs.kr/xboard/board.php?tbnum=8", {}, function (err, $, res, body) {
-//success selector 4/5 all meals
 
-//#region use for crawling
 for (let week = 2; week <= 6; week++) {
   for (let day = 2; day <= 6; day++) {
     meal_text = $(`#xb_fm_list > div.calendar > ul:nth-child(${week}) > li:nth-child(${day}) > div > div.slider_food_list`).text();
@@ -59,13 +51,6 @@ for (let week = 2; week <= 6; week++) {
     // console.log(arr[count]);
   }
 }
-//#endregion
-
-//let webcrawling = $(`#xb_fm_list > div.calendar > ul:nth-child(${3}) > li:nth-child(${3}) > div > div.slider_food_list`).text();
-//arr = webcrawling.split('"\n"');
-//arr[0] = arr[0].replace(/\t/g,"");
-//arr[0] = arr[0].replace(/\r/g,"");
-//arr[0] = arr[0].replace(/\n/g,"");
 console.log(arr[10]);
 });
 
