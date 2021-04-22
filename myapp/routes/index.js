@@ -6,12 +6,16 @@ require('dotenv').config();
 var bodyParser = require('body-parser');
 var client = require('cheerio-httpcli');
 
+
+
+
 //#region  socket io
-io = require('socket.io')();
- 
-io.on('connection', function(socket){
-  socket.broadcast.emit('hi');
-});
+const app = require('express'); 
+const http = require('http').Server(app); 
+const io = require('socket.io')(http);
+const room = io.of('/test');
+
+http.listen(9000, function () { console.log('Listening on *:9000'); });
 //#endregion
 
 const mysql = require("mysql");
