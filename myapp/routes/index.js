@@ -34,13 +34,13 @@ let meal_text_split = new Array();
 let school_meal_arr = new Array();
 function IWantSchoolMeal(num,when) {
   if(when == 'morning') {
-    return num*3+1;
+    return num*3+1+6;
   }
   else if(when == 'lunch') {
-    return num*3+2;
+    return num*3+2+6;
   }
   else {
-    return num*3+3;
+    return num*3+3+6;
   }
   
 }
@@ -63,7 +63,7 @@ client.fetch("http://gsm.gen.hs.kr/xboard/board.php?tbnum=8", {}, function (err,
       school_meal_arr.push(meal_text_split[2]);
     }
   }
-  console.log(school_meal_arr[10]);
+  console.log(school_meal_arr[IWantSchoolMeal(19,'lunch')]);
 });
 
 //나중엔 DB에서 값 가져오기
