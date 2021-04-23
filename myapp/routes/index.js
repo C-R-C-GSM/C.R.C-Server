@@ -53,7 +53,7 @@ client.fetch("http://gsm.gen.hs.kr/xboard/board.php?tbnum=8", {}, function (err,
 
   for (let week = 2; week <= 6; week++) {
     for (let day = 2; day <= 6; day++) {
-      meal_text = $(`#xb_fm_list > div.calendar > ul:nth-child(${week}) > li:nth-child(${day}) > div > div.slider_food_list`).text();
+      meal_text = $(`#xb_fm_list > div.calendar > ul:nth-child(${3}) > li:nth-child(${day}) > div > div.slider_food_list`).text();
 
       meal_text = meal_text.replace(/\t/g,"");
       meal_text = meal_text.replace(/\r/g,"");
@@ -67,7 +67,7 @@ client.fetch("http://gsm.gen.hs.kr/xboard/board.php?tbnum=8", {}, function (err,
       school_meal_arr.push(meal_text_split[2]);
     }
   }
-  console.log(school_meal_arr[IWantSchoolMeal(19,'lunch')]);
+  console.log(school_meal_arr);
 });
 
 //나중엔 DB에서 값 가져오기
@@ -75,8 +75,8 @@ let student = 30;
 
 router.get('/', function(req, res, next) {
   console.log('get success');
-  //res.json({student:student});
-  res.json({meal});
+  res.json({student:student});
+  //res.json({meal});
 });
 
 router.post('/', function(req,res,next) {
@@ -92,11 +92,11 @@ router.post('/', function(req,res,next) {
     console.log(results[0].check);
   });
   */
- connection.query("INSERT INTO students(check) VALUE('"+true+"'", function(error, results, fields) {
-   if(error) {
-     console.log(error);
-   }
- });
+//  connection.query("INSERT INTO students(check) VALUE('"+true+"'", function(error, results, fields) {
+//    if(error) {
+//      console.log(error);
+//    }
+//  });
 });
 
 module.exports = router;
