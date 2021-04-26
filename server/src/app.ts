@@ -16,12 +16,9 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
-let meal = "";
-
-let meal_text;
-let meal_text_split = new Array();
-let school_meal_arr = new Array();
-
+let meal_text:string;
+let meal_text_split:string[];
+let school_meal_arr:string[];
 
 const socketapp = require('express'); 
 const http = require('http').Server(socketapp); 
@@ -35,8 +32,8 @@ var client = require('cheerio-httpcli');
 
 client.fetch("http://gsm.gen.hs.kr/xboard/board.php?tbnum=8", {}, function (err:Error, $:any, res:Response, body:Body) {
 
-  for (let week = 2; week <= 6; week++) {
-    for (let day = 2; day <= 6; day++) {
+  for (let week:number = 2; week <= 6; week++) {
+    for (let day:number = 2; day <= 6; day++) {
       meal_text = $(`#xb_fm_list > div.calendar > ul:nth-child(${3}) > li:nth-child(${day}) > div > div.slider_food_list`).text();
 
       meal_text = meal_text.replace(/\t/g,"");
@@ -54,7 +51,7 @@ client.fetch("http://gsm.gen.hs.kr/xboard/board.php?tbnum=8", {}, function (err:
   console.log(school_meal_arr);
 });
 
-let student = 0;
+let student:number = 0;
 
 app.get("/", (request: Request, response: Response, next: NextFunction) => {
     console.log('get success');
