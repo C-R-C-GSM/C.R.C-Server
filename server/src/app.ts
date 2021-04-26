@@ -4,6 +4,18 @@ const app = express();
 
 require('dotenv').config();
 
+const mysql = require("mysql");
+
+var connection = mysql.createConnection({
+    host:process.env.DB_HOST,
+    port:process.env.DB_PORT,
+    user:process.env.DB_USER ,
+    password:process.env.DB_PASSWORD,
+    database:process.env.DB_DATABASE
+});
+
+connection.connect();
+
 let meal = "";
 
 let meal_text;
@@ -17,8 +29,6 @@ const io = require('socket.io')(http);
 const room = io.of('/test');
 
 http.listen(9000, function () { console.log('Listening on *:9000'); });
-
-const mysql = require("mysql");
 
 var bodyParser = require('body-parser');
 var client = require('cheerio-httpcli');
