@@ -71,7 +71,7 @@ client.fetch("http://gsm.gen.hs.kr/xboard/board.php?tbnum=8", {}, function (err,
 });
 
 //나중엔 DB에서 값 가져오기
-let student = 30;
+let student = 0;
 
 router.get('/', function(req, res, next) {
   console.log('get success');
