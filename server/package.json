@@ -25,6 +25,7 @@
     "cheerio-httpcli": "^0.8.1",
     "dotenv": "^8.2.0",
     "mysql": "^2.18.1",
+    "reflect-metadata": "^0.1.13",
     "socket.io": "^4.0.1"
   }
 }

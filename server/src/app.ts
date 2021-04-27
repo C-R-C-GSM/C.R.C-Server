@@ -1,10 +1,12 @@
 import express, { Request, Response, NextFunction } from "express";
+import "reflect-metadata"
 
 const app = express();
 
 require('dotenv').config();
 
 const mysql = require("mysql");
+
 
 var connection = mysql.createConnection({
     host:process.env.DB_HOST,
